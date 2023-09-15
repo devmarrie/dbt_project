@@ -1,0 +1,11 @@
+
+version: 2
+
+sources:
+  - name: staging
+    database: arcane-grin-394118
+    schema: trips_data_all
+
+    tables:
+      - name: green_2019_2020
+      - name: yellow_2019_2020
