@@ -13,7 +13,7 @@ SELECT
     cast(tpep_dropoff_datetime as timestamp) as dropoff_datetime,
     
     -- trip info
-    store_and_fwd_flag,
+    cast(store_and_fwd_flag as string) as store_and_fwd_flag,
     cast(passenger_count as integer) as passenger_count,
     cast(trip_distance as numeric) as trip_distance,
     1 as trip_type,
@@ -28,9 +28,9 @@ SELECT
     cast(improvement_surcharge as numeric) as improvement_surcharge,
     cast(total_amount as numeric) as total_amount,
     cast(payment_type as integer) as payment_type,
-    {{get_payment_type_description('payment_type')}} as get_payment_type_description,
+    {{get_payment_type_description('payment_type')}} as payment_type_description,
     cast(congestion_surcharge as numeric) as congestion_surcharge
-FROM {{source("staging", "yellow_2019_2020")}}
+FROM {{source("staging", "nyc_yellow_tripdata")}}
 WHERE VendorID is not null
 -- dbt build --m <model.sql> --var 'is_test_run: false'
 {% if var('is_test_run', default=true) %}
